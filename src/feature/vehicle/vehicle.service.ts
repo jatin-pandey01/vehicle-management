@@ -9,34 +9,39 @@ import { VehicleDto } from './dto/vehicle.dto';
 export class VehiclesService {
   constructor(
     @InjectRepository(VehicleEntity)
-    private vehicleRepo: Repository<VehicleEntity>,
+    private vehicleRepo: Repository<VehicleEntity>
   ) {}
 
+  public async findAll(){
+    return await this.vehicleRepo.find();
+    
+  }
 
-  async findOne(id: string) {
+  public async findOne(id: string) {
     const vehicle = await this.vehicleRepo.findOne({ where: { _id : new ObjectId(id) } });
+    console.log(vehicle);
     if (!vehicle) throw new NotFoundException(`Vehicle #${id} not found`);
     return vehicle;
   }
 
-  create(vehicleDto: VehicleDto) {
-    const vehicle = this.vehicleRepo.create(vehicleDto);
-    return this.vehicleRepo.save(vehicle);
+  public async create(vehicleDto: VehicleDto) {
+    const vehicle = await this.vehicleRepo.create(vehicleDto);
+    return await this.vehicleRepo.save(vehicle);
   }
 
-  async update(id: string, dto: VehicleDto) {
+  public async update(id: string, dto: VehicleDto) {
     await this.findOne(id);
     await this.vehicleRepo.update(id, dto);
     return this.findOne(id);
   }
 
-  async remove(id: string) {
+  public async remove(id: string) {
     const vehicle = await this.findOne(id);
     await this.vehicleRepo.remove(vehicle);
     return { message: 'Vehicle deleted successfully' };
   }
 
-  async getStats() {
+  public async getStats() {
     const total = await this.vehicleRepo.count();
     const active = await this.vehicleRepo.count({ where: { status: 'active' as any } });
     const breakdown = await this.vehicleRepo.count({ where: { status: 'breakdown' as any } });

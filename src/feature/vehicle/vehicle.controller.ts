@@ -11,28 +11,35 @@ import { VehicleDto } from './dto/vehicle.dto';
 export class VehiclesController {
   constructor(private readonly vehiclesService: VehiclesService) {}
 
+  @Get()
+  public async findAll(){
+    return await this.vehiclesService.findAll();
+  }
+
   @Get('stats')
-  getStats() {
+  public async getStats() {
     return this.vehiclesService.getStats();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  public async findOne(@Param('id') id: string) {
+    console.log(id);
+    
     return this.vehiclesService.findOne(id);
   }
 
   @Post()
-  create(@Body() body: VehicleDto) {
+  public async create(@Body() body: VehicleDto) {
     return this.vehiclesService.create(body);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: VehicleDto) {
+  public async update(@Param('id') id: string, @Body() body: VehicleDto) {
     return this.vehiclesService.update(id, body);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  public async remove(@Param('id') id: string) {
     return this.vehiclesService.remove(id);
   }
 }
