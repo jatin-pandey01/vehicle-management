@@ -1,11 +1,9 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { FuelService } from './fuel.service';
-// import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiTags('fuel')
 @ApiBearerAuth()
-// @UseGuards(JwtAuthGuard)
 @Controller('fuel')
 export class FuelController {
   constructor(private readonly fuelService: FuelService) {}

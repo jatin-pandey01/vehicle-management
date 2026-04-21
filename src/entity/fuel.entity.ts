@@ -1,9 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, ObjectIdColumn, ObjectId } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity('tbl_Fuel')
-export class FuelEntity {
-  @ObjectIdColumn()
-  _id: ObjectId;
+export class FuelEntity extends BaseEntity {
 
   @Column()
   vehicleId: number;
@@ -40,7 +39,4 @@ export class FuelEntity {
 
   @Column({ nullable: true })
   enteredBy: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
 }

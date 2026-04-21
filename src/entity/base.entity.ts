@@ -8,13 +8,13 @@ export class BaseEntity{
   @Column({ nullable: true})
   isActive: boolean;
 
-  @CreateDateColumn({ nullable: true})
+  @CreateDateColumn({ type: 'timestamp', nullable: true})
   createdAt: Date;
 
-  @UpdateDateColumn({ nullable: true})
+  @UpdateDateColumn({ type: 'timestamp', nullable: true})
   updatedAt: Date;
 
-  @DeleteDateColumn({ nullable: true})
+  @DeleteDateColumn({ type: 'timestamp', nullable: true})
   deletedAt: Date;
 
 }
