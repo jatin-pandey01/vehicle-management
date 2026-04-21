@@ -78,7 +78,7 @@ export class EmployeeService{
         _id: new ObjectId(id)
       });
 
-      return { message : "Deleted Successfully" };
+      return { message : "Employee Deleted Successfully" };
     } catch (error) {
       this.appLogger.error(error);
       throw error;

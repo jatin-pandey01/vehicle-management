@@ -69,15 +69,9 @@ export class VehiclesService {
 
   public async remove(id: string) {
     try {
-      const vehicle = await this.vehicleRepo.findOne({
-        where:{
-          _id : new ObjectId(id)
-        }
+      await this.vehicleRepo.softDelete({
+        _id: new ObjectId(id)
       });
-      if(!vehicle){
-        throw new NotFoundException("Vehicle not found");
-      }
-      await this.vehicleRepo.remove(vehicle);
       return { message: 'Vehicle deleted successfully' };
     } catch (error) {
       this.appLogger.error(error);
