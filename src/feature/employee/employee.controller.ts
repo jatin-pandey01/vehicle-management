@@ -1,12 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { EmployeeService } from "./employee.service";
-import { ObjectId } from "typeorm";
 import { CreateEmployeeDto } from "./dto/employee.dto";
 import { AppLogger } from "src/service/logger.service";
 
-@ApiTags('employee')
 @Controller('employee')
+@ApiTags('employee')
 export class EmployeeController{
   public appLogger = new AppLogger();
 

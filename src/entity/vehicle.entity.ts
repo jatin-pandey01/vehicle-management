@@ -21,30 +21,30 @@ export enum VehicleType {
 @Entity('tbl_Vehicle')
 export class VehicleEntity extends BaseEntity {
 
-  @Column({ unique: true })
+  @Column({ type:'varchar', unique: true })
   vehicleNumber: string;
 
-  @Column({nullable: true, default: VehicleType.OTHER})
+  @Column({ type:'varchar', nullable: true, default: VehicleType.OTHER})
   vehicleType: string;
 
-  @Column({nullable: true})
+  @Column({ type:'varchar', nullable: true})
   vehicleBrand: string;
 
-  @Column({nullable: true})
+  @Column({ type:'varchar', nullable: true})
   vehicleModel: string;
 
-  @Column({nullable: true})
+  @Column({ type:'varchar', nullable: true})
   vehicleYear: number;
 
   @Column({ nullable:true, type: 'varchar', default: VehicleStatus.ACTIVE })
   status: VehicleStatus;
 
-  @Column({ nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   insuranceExpiryDate: Date;
 
-  @Column({ nullable: true })
+  @Column({ type:'timestamp', nullable: true })
   registrationExpiryDate: Date;
 
-  @Column({nullable: true})
+  @Column({ type:'timestamp', nullable: true})
   pocExpiryDate: Date;
 }

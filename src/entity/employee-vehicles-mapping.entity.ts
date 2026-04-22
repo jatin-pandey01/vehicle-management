@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, ObjectId } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, ObjectId, ObjectIdColumn } from "typeorm";
 import { BaseEntity } from "./base.entity";
 import { EmployeeEntity } from "./employee.entity";
 import { VehicleEntity } from "./vehicle.entity";
@@ -10,20 +10,20 @@ export class EmployeeVehiclesMappingEntity extends BaseEntity{
   @JoinColumn({name: "employeeId", referencedColumnName: "_id"})
   employee: EmployeeEntity;
 
-  @Column({ nullable: true })
+  @ObjectIdColumn({ nullable: true })
   employeeId: ObjectId;
 
   @ManyToOne(() => VehicleEntity, { nullable: true })
   @JoinColumn({ name: "vehicleId", referencedColumnName: "_id" })
   vehicle: VehicleEntity;
 
-  @Column({ nullable: true })
+  @ObjectIdColumn({ nullable: true })
   vehicleId: ObjectId;
 
-  @Column({ type: "string", nullable: true })
+  @Column({ type: "varchar", nullable: true })
   openingReading: string;
 
-  @Column({ type: 'string', nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   closingReading: string;
 
   @Column({ type: 'timestamp', nullable: true })
@@ -35,10 +35,10 @@ export class EmployeeVehiclesMappingEntity extends BaseEntity{
   @Column({ type: 'float', nullable: true })
   kmDriven: number;
 
-  @Column({ type: 'string', nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   project: string;
 
-  @Column({ type: 'string', nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   remarks: string;
 
   @Column({ type: 'boolean', nullable: true })

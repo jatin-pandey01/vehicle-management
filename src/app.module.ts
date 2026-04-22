@@ -5,17 +5,22 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { VehicleEntity } from './entity/vehicle.entity';
 import { FuelEntity } from './entity/fuel.entity';
 import { VehiclesModule } from './feature/vehicle/vehicle.module';
-import { FuelModule } from './feature/fuel/fuel.module';
+import { EmployeeModule } from './feature/employee/employee.module';
+import { EmployeeVehicleModule } from './feature/employee-vehicle-mapping/employee-vehicle-mapping.module';
+import { EmployeeEntity } from './entity/employee.entity';
+import { EmployeeVehiclesMappingEntity } from './entity/employee-vehicles-mapping.entity';
+import { BankDetailsEntity } from './entity/bank-details.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type:'mongodb',
       url: process.env.DATABASE_URL,
-      entities:[VehicleEntity,FuelEntity]
+      entities:[VehicleEntity, EmployeeEntity, BankDetailsEntity, EmployeeVehiclesMappingEntity]
     }),
     VehiclesModule,
-    FuelModule,
+    EmployeeModule,
+    EmployeeVehicleModule
   ],
   controllers: [AppController],
   providers: [AppService],

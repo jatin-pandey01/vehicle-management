@@ -7,10 +7,10 @@ async function bootstrap() {
   app.enableCors();
   await app.listen(process.env.PORT || 3000);
   app.useGlobalPipes(
-  new ValidationPipe({
-    whitelist: true,
-    transform: true,
-  }),
-);
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
 }
 bootstrap();
