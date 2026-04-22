@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EmployeeEntity } from "src/entity/employee.entity";
-import { ObjectId, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { ObjectId } from 'mongodb';
 import { CreateEmployeeDto } from "./dto/employee.dto";
 import { AppLogger } from "src/service/logger.service";
 
