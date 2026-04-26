@@ -47,7 +47,11 @@ export class EmployeeService{
 
   public async getAll(){
     try {
-      return await this.employee.find();
+      return await this.employee.find({
+        where:{
+          deletedAt: null
+        }
+      });
     } catch (error) {
       this.appLogger.error(error);
       throw error;
@@ -58,7 +62,8 @@ export class EmployeeService{
     try {
       const employee =  await this.employee.findOne({
         where:{
-          _id : new ObjectId(id)
+          _id : new ObjectId(id),
+          deletedAt: null
         }
       });
   
@@ -75,9 +80,10 @@ export class EmployeeService{
 
   public async delete(id: string){
     try {
-      await this.employee.softDelete({
-        _id: new ObjectId(id)
-      });
+      await this.employee.update(
+        { _id: new ObjectId(id) },
+        { deletedAt: new Date() }
+      );
 
       return { message : "Employee Deleted Successfully" };
     } catch (error) {

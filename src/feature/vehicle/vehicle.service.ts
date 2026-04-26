@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { VehicleEntity } from '../../entity/vehicle.entity'
 import { ObjectId } from 'mongodb';
 import { VehicleDto } from './dto/vehicle.dto';
@@ -18,7 +18,11 @@ export class VehiclesService {
 
   public async findAll(){
     try {
-      return await this.vehicleRepo.find();
+      return await this.vehicleRepo.find({
+        where:{
+          deletedAt: null
+        }
+      });
     } catch (error) {
       this.appLogger.error(error);
       throw error;
@@ -69,9 +73,10 @@ export class VehiclesService {
 
   public async remove(id: string) {
     try {
-      await this.vehicleRepo.softDelete({
-        _id: new ObjectId(id)
-      });
+      await this.vehicleRepo.update(
+        { _id: new ObjectId(id) },
+        { deletedAt: new Date() }
+      );
       return { message: 'Vehicle deleted successfully' };
     } catch (error) {
       this.appLogger.error(error);
